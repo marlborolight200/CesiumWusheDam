@@ -25,6 +25,7 @@ export default defineConfig(({ mode }) => {
     })
 
   return {
+    base:'./',
     plugins: [
       vue(),
       copyCesium(['Assets', 'ThirdParty', 'Widgets', 'Workers']),
