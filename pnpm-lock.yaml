@@ -8,25 +8,31 @@ importers:
 
   .:
     dependencies:
+      bootstrap:
+        specifier: ^5.3.3
+        version: 5.3.3(@popperjs/core@2.11.8)
       cesium:
         specifier: ^1.111.0
         version: 1.111.0
+      proj4:
+        specifier: ^2.15.0
+        version: 2.15.0
       vue:
         specifier: ^3.3.8
         version: 3.3.8
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^4.5.0
-        version: 4.5.0(vite@5.0.2)(vue@3.3.8)
+        version: 4.5.0(vite@5.0.2(@types/node@20.9.4))(vue@3.3.8)
       vite:
         specifier: ^5.0.2
-        version: 5.0.2
+        version: 5.0.2(@types/node@20.9.4)
       vite-plugin-externals:
         specifier: ^0.6.2
-        version: 0.6.2(vite@5.0.2)
+        version: 0.6.2(vite@5.0.2(@types/node@20.9.4))
       vite-plugin-static-copy:
         specifier: ^0.17.1
-        version: 0.17.1(vite@5.0.2)
+        version: 0.17.1(vite@5.0.2(@types/node@20.9.4))
 
 packages:
 
@@ -202,6 +208,9 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
+  '@popperjs/core@2.11.8':
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+
   '@protobufjs/aspromise@1.1.2':
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
 
@@ -261,25 +270,21 @@ packages:
     resolution: {integrity: sha512-FEuAjzVIld5WVhu+M2OewLmjmbXWd3q7Zcx+Rwy4QObQCqfblriDMMS7p7+pwgjZoo9BLkP3wa9uglQXzsB9ww==}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.5.1':
     resolution: {integrity: sha512-f5Gs8WQixqGRtI0Iq/cMqvFYmgFzMinuJO24KRfnv7Ohi/HQclwrBCYkzQu1XfLEEt3DZyvveq9HWo4bLJf1Lw==}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-x64-gnu@4.5.1':
     resolution: {integrity: sha512-CWPkPGrFfN2vj3mw+S7A/4ZaU3rTV7AkXUr08W9lNP+UzOvKLVf34tWCqrKrfwQ0NTk5GFqUr2XGpeR2p6R4gw==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.5.1':
     resolution: {integrity: sha512-ZRETMFA0uVukUC9u31Ed1nx++29073goCxZtmZARwk5aF/ltuENaeTtRVsSQzFlzdd4J6L3qUm+EW8cbGt0CKQ==}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-win32-arm64-msvc@4.5.1':
     resolution: {integrity: sha512-ihqfNJNb2XtoZMSCPeoo0cYMgU04ksyFIoOw5S0JUVbOhafLot+KD82vpKXOurE2+9o/awrqIxku9MRR9hozHQ==}
@@ -362,6 +367,11 @@ packages:
 
   bitmap-sdf@1.0.4:
     resolution: {integrity: sha512-1G3U4n5JE6RAiALMxu0p1XmeZkTeCwGKykzsLTCqVzfSDaN6S7fKnkIkfejogz+iwqBWc0UYAIKnKHNN7pSfDg==}
+
+  bootstrap@5.3.3:
+    resolution: {integrity: sha512-8HLCdWgyoMguSO9o+aH+iuZ+aht+mzW0u3HIMzVu7Srrpv7EBBxTnrFlSCskwdY1+EOFQSm7uMJhNQHkdPcmjg==}
+    peerDependencies:
+      '@popperjs/core': ^2.11.8
 
   braces@3.0.2:
     resolution: {integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==}
@@ -487,6 +497,9 @@ packages:
   meshoptimizer@0.19.0:
     resolution: {integrity: sha512-58qz5Qc/6Geu8Ib3bBWERE5R7pM5ErrJVo16fAtu6ryxVaE3VAtM/u2vurDxaq8AGZ3yWxuM/DnylTga5a4XCQ==}
 
+  mgrs@1.0.0:
+    resolution: {integrity: sha512-awNbTOqCxK1DBGjalK3xqWIstBZgN6fxsMSiXLs9/spqWkF2pAhb2rrYCFSsr1/tT7PhcDGjZndG8SWYn0byYA==}
+
   micromatch@4.0.5:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
     engines: {node: '>=8.6'}
@@ -516,6 +529,9 @@ packages:
   postcss@8.4.31:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
+
+  proj4@2.15.0:
+    resolution: {integrity: sha512-LqCNEcPdI03BrCHxPLj29vsd5afsm+0sV1H/O3nTDKrv8/LA01ea1z4QADDMjUqxSXWnrmmQDjqFm1J/uZ5RLw==}
 
   protobufjs@7.2.5:
     resolution: {integrity: sha512-gGXRSXvxQ7UiPgfw8gevrfRWcTlSbOFg+p/N+JVJEK5VhueL2miT6qTymqAmjr1Q5WbOCyJbyrk6JfWKwlFn6A==}
@@ -626,6 +642,9 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  wkt-parser@1.4.0:
+    resolution: {integrity: sha512-qpwO7Ihds/YYDTi1aADFTI1Sm9YC/tTe3SHD24EeIlZxy7Ik6a1b4HOz7jAi0xdUAw487duqpo8OGu+Tf4nwlQ==}
 
 snapshots:
 
@@ -750,6 +769,8 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
+  '@popperjs/core@2.11.8': {}
+
   '@protobufjs/aspromise@1.1.2': {}
 
   '@protobufjs/base64@1.1.2': {}
@@ -815,9 +836,9 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@vitejs/plugin-vue@4.5.0(vite@5.0.2)(vue@3.3.8)':
+  '@vitejs/plugin-vue@4.5.0(vite@5.0.2(@types/node@20.9.4))(vue@3.3.8)':
     dependencies:
-      vite: 5.0.2
+      vite: 5.0.2(@types/node@20.9.4)
       vue: 3.3.8
 
   '@vue/compiler-core@3.3.8':
@@ -897,6 +918,10 @@ snapshots:
   binary-extensions@2.2.0: {}
 
   bitmap-sdf@1.0.4: {}
+
+  bootstrap@5.3.3(@popperjs/core@2.11.8):
+    dependencies:
+      '@popperjs/core': 2.11.8
 
   braces@3.0.2:
     dependencies:
@@ -1039,6 +1064,8 @@ snapshots:
 
   meshoptimizer@0.19.0: {}
 
+  mgrs@1.0.0: {}
+
   micromatch@4.0.5:
     dependencies:
       braces: 3.0.2
@@ -1061,6 +1088,11 @@ snapshots:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  proj4@2.15.0:
+    dependencies:
+      mgrs: 1.0.0
+      wkt-parser: 1.4.0
 
   protobufjs@7.2.5:
     dependencies:
@@ -1133,28 +1165,29 @@ snapshots:
 
   urijs@1.19.11: {}
 
-  vite-plugin-externals@0.6.2(vite@5.0.2):
+  vite-plugin-externals@0.6.2(vite@5.0.2(@types/node@20.9.4)):
     dependencies:
       acorn: 8.11.2
       es-module-lexer: 0.4.1
       fs-extra: 10.1.0
       magic-string: 0.25.9
-      vite: 5.0.2
+      vite: 5.0.2(@types/node@20.9.4)
 
-  vite-plugin-static-copy@0.17.1(vite@5.0.2):
+  vite-plugin-static-copy@0.17.1(vite@5.0.2(@types/node@20.9.4)):
     dependencies:
       chokidar: 3.5.3
       fast-glob: 3.3.2
       fs-extra: 11.1.1
       picocolors: 1.0.0
-      vite: 5.0.2
+      vite: 5.0.2(@types/node@20.9.4)
 
-  vite@5.0.2:
+  vite@5.0.2(@types/node@20.9.4):
     dependencies:
       esbuild: 0.19.7
       postcss: 8.4.31
       rollup: 4.5.1
     optionalDependencies:
+      '@types/node': 20.9.4
       fsevents: 2.3.3
 
   vue@3.3.8:
@@ -1164,3 +1197,5 @@ snapshots:
       '@vue/runtime-dom': 3.3.8
       '@vue/server-renderer': 3.3.8(vue@3.3.8)
       '@vue/shared': 3.3.8
+
+  wkt-parser@1.4.0: {}
