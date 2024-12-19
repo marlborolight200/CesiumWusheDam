@@ -1,6 +1,6 @@
 <template>
     <ul class="list-group">
-        <li class="list-group-item" v-for="item in LayerItems.LayerItems">
+        <li class="list-group-item" v-for="item in LayerItems.IonLayers">
             <div data-mdb-input-init class="form-outline">
                 <input class="form-check-input" type="checkbox" value="" v-bind:id="item.IonID"
                     v-on:click.native="loadIonResource($event)">
