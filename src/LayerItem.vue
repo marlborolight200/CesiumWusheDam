@@ -1,6 +1,6 @@
 <template>
     <ul class="list-group">
-        <li class="list-group-item" v-for="item in LayerItems.LayerItems">
+        <li class="list-group-item" v-for="item in LayerItems.IonLayers">
             <div data-mdb-input-init class="form-outline">
                 <input class="form-check-input" type="checkbox" value="" v-bind:id="item.IonID"
                     v-on:click.native="loadIonResource($event)">
@@ -15,8 +15,7 @@
 </template>
 
 <script setup>
-<<<<<<< HEAD
-import LayerItems from './JSON/IonLayers.json'
+import LayerItems from '@/JSON/IonLayers.json'
 // const emit = defineEmits(['loadIonResource', 'SetLayerTransparent'])
 // onMounted(() => {
 //     console.log(emit['loadIonResource'])
@@ -29,17 +28,4 @@ const props = defineProps({
     loadIonResource:{type: Function,required: true,},
     setLayerTransparent: {type: Function,required: true,}
 })
-=======
-import { ref } from "vue";
-import cesiumDiv from './CesiumContainer.vue'
-import LayerItems from '@/json/IonLayers.json'
-const cesiumDivRef = ref(null);
- 
-function loadIonResource(IoID) {
-    cesiumDivRef.value.loadIonResource(IoID)
-}
-function SetLayerTransparent(IoID) {
-    cesiumDivRef.value.SetLayerTransparent(IoID)
-}
->>>>>>> c24bb0381cde2aba66ecbabb351ceb88f8ab683c
 </script>
