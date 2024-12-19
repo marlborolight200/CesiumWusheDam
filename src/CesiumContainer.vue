@@ -3,6 +3,8 @@
 </template>
 
 <script setup>
+// Wushe Reservoir
+// window.CESIUM_BASE_URL = 'CesiumWusheDam'
 import { onMounted, ref, shallowRef } from 'vue'
 import * as Cesium from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'

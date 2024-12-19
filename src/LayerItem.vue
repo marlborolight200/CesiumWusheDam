@@ -15,6 +15,7 @@
 </template>
 
 <script setup>
+<<<<<<< HEAD
 import LayerItems from './JSON/IonLayers.json'
 // const emit = defineEmits(['loadIonResource', 'SetLayerTransparent'])
 // onMounted(() => {
@@ -28,4 +29,17 @@ const props = defineProps({
     loadIonResource:{type: Function,required: true,},
     setLayerTransparent: {type: Function,required: true,}
 })
+=======
+import { ref } from "vue";
+import cesiumDiv from './CesiumContainer.vue'
+import LayerItems from '@/json/IonLayers.json'
+const cesiumDivRef = ref(null);
+ 
+function loadIonResource(IoID) {
+    cesiumDivRef.value.loadIonResource(IoID)
+}
+function SetLayerTransparent(IoID) {
+    cesiumDivRef.value.SetLayerTransparent(IoID)
+}
+>>>>>>> c24bb0381cde2aba66ecbabb351ceb88f8ab683c
 </script>
