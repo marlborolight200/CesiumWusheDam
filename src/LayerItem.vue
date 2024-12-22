@@ -1,7 +1,18 @@
 <template>
-    <ul class="list-group">
-        <li class="list-group-item" v-for="item in LayerItems.IonLayers">
-            <div data-mdb-input-init class="form-outline">
+    <!-- <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdown">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul> -->
+
+
+    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdown">
+        <li v-for="item in LayerItems.IonLayers">
+            <div class="form-outline">
                 <input class="form-check-input" type="checkbox" value="" v-bind:id="item.IonID"
                     v-on:click.native="loadIonResource($event)">
                 <label class="form-check-label" v-bind:for="item.IonID">
@@ -25,7 +36,7 @@ const props = defineProps({
     // stat: Object,
     // index: Number,
     // segments: Number,
-    loadIonResource:{type: Function,required: true,},
-    setLayerTransparent: {type: Function,required: true,}
+    loadIonResource: { type: Function, required: true, },
+    setLayerTransparent: { type: Function, required: true, }
 })
 </script>
