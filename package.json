@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "cesium": "^1.111.0",
     "proj4": "^2.15.0",
     "vue": "^3.3.8"
