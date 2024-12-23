@@ -4,15 +4,38 @@ import * as Cesium from 'cesium'
 var viewer=null;
 var scene=null;
 var CoordinateOverlay=null;
-
-export function setInputAction(cviewer){
+var _screenSpaceEventHandler=null;
+export function CesiumMouseOver(cviewer) {
     viewer=cviewer;
+}
+
+// define a handler
+function doc_keyUp(e) {
+
+    // this would test for whichever key is 40 (down arrow) and the ctrl key at the same time
+    if (e.shiftKey && e.code === 'KeyQ') {
+        // call your function to do the thing
+        CoordinateOverlay.style.display = 'none';
+        _screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    };
+
+    if (e.shiftKey && e.code === 'KeyW') {
+        // call your function to do the thing
+        _screenSpaceEventHandler.setInputAction(defaultMouseOver, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    };
+}
+// register the handler 
+document.addEventListener('keyup', doc_keyUp, false);
+
+CesiumMouseOver.prototype.setInputAction= ()=>{
+    // viewer=cviewer;
     scene = viewer.scene;
     CoordinateOverlay = CreateElementHoverDiv();
     CoordinateOverlay.style.color = 'white';
     CoordinateOverlay.style.fontSize = "12px";
-    var screenSpaceEventHandler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+    const screenSpaceEventHandler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
     screenSpaceEventHandler.setInputAction(defaultMouseOver, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    _screenSpaceEventHandler= screenSpaceEventHandler;
 }
 function mousePositionToCartesianFeature(mousePosition) {
     //於地形上

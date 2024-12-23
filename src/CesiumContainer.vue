@@ -88,7 +88,8 @@ onMounted(() => {
   // loadIonResource('Ion16193');
   
   // 加入游標hover事件
-  CesiumMouseOver.setInputAction(viewer.value);
+  const MouseOver = new CesiumMouseOver.CesiumMouseOver(viewer.value);
+  const MouseOverSetInputAction =MouseOver.setInputAction();
 
 })
 
@@ -104,7 +105,7 @@ onMounted(() => {
 } */
 
 .cesiumDiv {
-  height: 97vh;
-  width: 97vw;
+  height:99vh;
+  width: 100vw;
 }
 </style>

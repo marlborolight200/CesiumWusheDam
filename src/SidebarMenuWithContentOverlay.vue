@@ -12,6 +12,12 @@ const SetLayerTransparent = (IoID) => {
 }
 
 onMounted(() => {
+    const cesiumHelpBtn =document.querySelector("span.cesium-navigationHelpButton-wrapper");
+    const strH='<button class="cesium-button cesium-toolbar-button" data-bs-toggle="offcanvas" data-bs target="#offcanvas" role="button"><i class="bi bi-sliders fs-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" title="Show Menu"></i></button>'
+    const container = document.createElement('div');
+    container.innerHTML = strH;
+    // const aa = parser.parseFromString(strH, 'text/html');
+    document.querySelector("div.cesium-viewer-toolbar").insertBefore(container.firstElementChild,cesiumHelpBtn )
     // document.querySelector('#dismiss, .overlay').onclick=(()=>{
     //     document.querySelector('#sidebar').classList.remove('active');
     //     // hide overlay
@@ -28,12 +34,7 @@ onMounted(() => {
 })
 </script>
 <style>
-.btnNavBar {
-    position: absolute;
-    top: 5px;
-    left: 80px;
-    z-index: 1000;
-}
+
 </style>
 <!-- <style lang="css" scoped>
 .wrapper {
@@ -123,10 +124,7 @@ onMounted(() => {
             </ul>
         </div>
     </div>
-    <div class="container-fluid">
-        <button class="btnNavBar" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button">
-            <i class="bi bi-sliders fs-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
-        </button>
+    <div class="jumbotron card card-block">  
         <cesiumDiv ref="cesiumDivRef"></cesiumDiv>
     </div>
 </template>
