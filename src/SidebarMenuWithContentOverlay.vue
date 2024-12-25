@@ -12,12 +12,14 @@ const SetLayerTransparent = (IoID) => {
 }
 
 onMounted(() => {
-    const cesiumHelpBtn =document.querySelector("span.cesium-navigationHelpButton-wrapper");
-    const strH='<button class="cesium-button cesium-toolbar-button" data-bs-toggle="offcanvas" data-bs target="#offcanvas" role="button"><i class="bi bi-sliders fs-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" title="Show Menu"></i></button>'
+    const cesiumHelpBtn = document.querySelector("span.cesium-navigationHelpButton-wrapper");
+    const strH = '<button id="cSideBarToggle" class="cesium-button cesium-toolbar-button" data-bs-toggle="offcanvas" data-bs target="#offcanvas" role="button"><i class="bi bi-toggles fs-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" title="Show Menu"></i></button>'
     const container = document.createElement('div');
     container.innerHTML = strH;
     // const aa = parser.parseFromString(strH, 'text/html');
-    document.querySelector("div.cesium-viewer-toolbar").insertBefore(container.firstElementChild,cesiumHelpBtn )
+    document.querySelector("div.cesium-viewer-toolbar").insertBefore(container.firstElementChild, cesiumHelpBtn);
+
+
     // document.querySelector('#dismiss, .overlay').onclick=(()=>{
     //     document.querySelector('#sidebar').classList.remove('active');
     //     // hide overlay
@@ -32,10 +34,29 @@ onMounted(() => {
     //     //document.querySelector('a[aria-expanded=true]').attributes('aria-expanded', 'false');
     // });
 })
-</script>
-<style>
 
-</style>
+
+
+function highlightBtn() {
+    const newspaperSpinning = [
+        { transform: "scale(1)" },
+        { transform: " scale(0.5)" },
+    ];
+
+    const newspaperTiming = {
+        duration: 600,
+        iterations: 3,
+    };
+    const dom = document.getElementById('cSideBarToggle');
+    dom.animate(newspaperSpinning, newspaperTiming);
+}
+
+
+// defineExpose({
+//     loadIonResource, SetLayerTransparent,
+// });
+</script>
+<style></style>
 <!-- <style lang="css" scoped>
 .wrapper {
     display: block;
@@ -84,15 +105,15 @@ onMounted(() => {
 </style> -->
 
 <template>
-    <div class="offcanvas offcanvas-start w-25" tabindex="-1" id="offcanvas" data-bs-keyboard="false"
-        data-bs-backdrop="false">
+    <div class="offcanvas offcanvas-start w-25 show" tabindex="-1" id="offcanvas" data-bs-keyboard="false"
+        aria-modal="true" data-bs-backdrop="false">
         <div class="offcanvas-header">
-            <h6 class="offcanvas-title d-none d-sm-block" id="offcanvas">Menu</h6>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <h6 class="offcanvas-title d-none d-sm-block" id="offcanvas">霧社水庫</h6>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" v-on:click="highlightBtn()"></button>
         </div>
         <div class="offcanvas-body px-0">
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link text-truncate">
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span>
                     </a>
@@ -104,27 +125,37 @@ onMounted(() => {
                 <li>
                     <a href="#" class="nav-link text-truncate">
                         <i class="fs-5 bi-table"></i><span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                </li> -->
+                <li class="dropdown w-100">
+                    <a href="#" class="nav-link dropdown-toggle  text-truncate" id="dropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fs-5 bi-water"></i><span class="ms-1 d-none d-sm-inline">歷年水深DTM</span>
+                    </a>
+                    <LayerItem :load-ion-resource="loadIonResource" :set-layer-transparent="SetLayerTransparent"
+                        :data-type="'IonLayers'">
+                    </LayerItem>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="nav-link dropdown-toggle  text-truncate" id="dropdown" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <i class="fs-5 bi-bootstrap"></i><span class="ms-1 d-none d-sm-inline">圖層套疊</span>
+                        <i class="fs-5 bi-fan"></i><span class="ms-1 d-none d-sm-inline">出水口</span>
                     </a>
-                    <LayerItem :load-ion-resource="loadIonResource" :set-layer-transparent="SetLayerTransparent">
+                    <LayerItem :load-ion-resource="loadIonResource" :set-layer-transparent="SetLayerTransparent"
+                        :data-type="'Drain'">
                     </LayerItem>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#" class="nav-link text-truncate">
                         <i class="fs-5 bi-grid"></i><span class="ms-1 d-none d-sm-inline">Products</span></a>
                 </li>
                 <li>
                     <a href="#" class="nav-link text-truncate">
                         <i class="fs-5 bi-people"></i><span class="ms-1 d-none d-sm-inline">Customers</span> </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
-    <div class="jumbotron card card-block">  
+    <div class="jumbotron card card-block">
         <cesiumDiv ref="cesiumDivRef"></cesiumDiv>
     </div>
 </template>

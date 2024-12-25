@@ -1,0 +1,38 @@
+{
+    "IonLayers": [
+        {
+            "name": "112-IM",
+            "IonID": "Ion2568526",
+            "type": "Imagery"
+        },
+        {
+            "name": "112年日月潭水深成果",
+            "IonID": "Ion2568525",
+            "type": "Terrain"
+        },
+        {
+            "name": "111年日月潭水深成果",
+            "IonID": "Ion2568662",
+            "type": "Terrain"
+        },
+        {
+            "name": "111-IM",
+            "IonID": "Ion2568664",
+            "type": "Imagery"
+        },
+        {
+            "name": "112-Ion-gray",
+            "IonID": "Ion2749084",
+            "type": "Imagery"
+        }
+    ],
+    "Drain": [
+        {
+            "name": "1號出水口"
+        },{
+            "name": "2號出水口"
+        },{
+            "name": "3號出水口"
+        }
+    ]
+}

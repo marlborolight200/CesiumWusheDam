@@ -95,12 +95,12 @@ function defaultMouseOver(movement) {
         "TWD97_X: " + p97[0].toFixed(2) + "<br/>" +
         "TWD97_Y: " + p97[1].toFixed(2) + "<br/>";
 
-    // if (cartesianFeature.type == "scene") {
-    //   innerHTML += "地物高程:" + model_height.toFixed(2) + "公尺";
-    // }
-    // else {
-    //   innerHTML += "海拔高程:" + cartographicLocation.height.toFixed(2) + "公尺";
-    // }
+    if (cartesianFeature.type == "scene") {
+      innerHTML += "地物高程:" + model_height.toFixed(2) + "公尺";
+    }
+    else {
+      innerHTML += "海拔高程:" + cartographicLocation.height.toFixed(2) + "公尺";
+    }
     CoordinateOverlay.style.display = 'block';
     CoordinateOverlay.innerHTML = innerHTML;
     // CoordinateOverlay.style.top=movement.endPosition.y.toFixed(0)+'px'
