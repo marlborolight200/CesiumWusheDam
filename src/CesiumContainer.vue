@@ -9,17 +9,50 @@ import { onMounted, ref, shallowRef } from 'vue'
 import * as Cesium from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 import * as CesiumMouseOver from './JS/CesiumMouseOver'
+import { IonLayers } from './json/DtmLayers.json'
+import { NLSC_ProviderViewModel } from './JS/NLSC_WMTS_ProviderViewModel.js'
 
 const props = defineProps({
   // stat: Object,
   // index: Number,
   // segments: Number,
-  CesiumImageLayers: { type: Array, default: [] }
+  CesiumImageLayers: { type: Array, default: [] },
+  CesiumWNlscMTSLayers: { type: Array, default: [] }
 })
 
 const cesiumDiv = ref()
 const viewer = shallowRef()
 const cesium3DTilesetCollection = shallowRef()
+function loadWMTSResource(event) {
+  var IonID = '';
+  // var tileset = null;
+  if (typeof event === 'string') {
+    IonID = event;
+  } else {
+    IonID = event.currentTarget.id;
+  }
+  const checked = document.getElementById(IonID).checked;
+  const layer = props.CesiumWNlscMTSLayers.find((item) => item.Name == IonID);
+ 
+  if (layer == null) { return; }
+  if (viewer.value.scene.imageryLayers.contains(layer.Layer)) {
+    // viewer.value.imageryLayers.raiseToTop(layer);
+    if (checked) {
+      // viewer.value.imageryLayers.raiseToTop(layer);
+    } else {
+      viewer.value.scene.imageryLayers.remove(layer.Layer, false);
+    }
+  } else {
+    if (checked) {
+      viewer.value.scene.imageryLayers.add(layer.Layer);
+      // viewer.value.flyTo(layer.Layer);
+    } else {
+      // viewer.value.imageryLayers.remove(layer, false);
+    }
+
+  }
+}
+
 async function loadIonResource(event) {
   try {
     var IonID = '';
@@ -52,28 +85,6 @@ async function loadIonResource(event) {
             }
 
           }
-
-
-          // const layer = await Cesium.IonImageryProvider.fromAssetId(parseInt(IonID.slice(3, IonID.length)));
-          // layer.prototype.id=IonID.slice(3, IonID.length);
-          // const layer = viewer.value.imageryLayers.addImageryProvider(
-          //   await Cesium.IonImageryProvider.fromAssetId(parseInt(IonID.slice(3, IonID.length))),
-          // );
-
-
-          // viewer.value.imageryLayers.addImageryProvider(tileset);
-          //       viewer.value.flyTo(tileset);
-          // tileset.id = IonID.slice(3, IonID.length);
-          //     const item = findTilesetIndex(tileset.id);
-          //     if (item != null) {
-          //       viewer.value.imageryLayers.addImageryProvider.remove(item)
-          //       // document.querySelector("#" + IonID).checked = false
-          //     } else {
-          //       viewer.value.imageryLayers.addImageryProvider.add(tileset);
-          //       viewer.value.flyTo(tileset);
-          //       // document.querySelector("#" + IonID).checked=true;
-          //     }
-
           break;
         case "Terrain":
           document.querySelectorAll("input[cesiumassetstype='Terrain']").forEach((item) => {
@@ -139,7 +150,13 @@ function SetLayerTransparent(event) {
   const layer = props.CesiumImageLayers.find((item) => item.Name == event.currentTarget.id.slice(0, event.currentTarget.id.length - 1));
   if (layer == null) { return }
   // console.log(event.currentTarget.value)
-  layer.Layer.alpha =event.currentTarget.value / 100;
+  layer.Layer.alpha = event.currentTarget.value / 100;
+}
+function SetLayerTransparentWMTS(event) {
+  const layer = props.CesiumWNlscMTSLayers.find((item) => item.Name == event.currentTarget.id.slice(0, event.currentTarget.id.length - 1));
+  if (layer == null) { return }
+  // console.log(event.currentTarget.value)
+  layer.Layer.alpha = event.currentTarget.value / 100;
 }
 
 function SetLayerTransparent3DTileset(event) {
@@ -154,7 +171,7 @@ function SetLayerTransparent3DTileset(event) {
 }
 
 defineExpose({
-  loadIonResource, SetLayerTransparent,
+  loadIonResource, SetLayerTransparent, loadWMTSResource, SetLayerTransparentWMTS
 });
 
 async function loadTerrain() {
@@ -165,7 +182,10 @@ async function loadTerrain() {
 onMounted(() => {
   // Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwNzgwZTEyYy1kZmY4LTQ1YzItYmNiYi02NTAyY2RhZThlYTUiLCJpZCI6NzcwOSwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTU5MjQ1MjQ2MH0.8u2-_RDVWD2Ne_11zQ07wA_gyCMUB50bcRKTmd9szEY';
   Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NzAzZDc1NS1mOTNhLTQ3ZmEtOGM3Ny05OWYzMDI2NWNlZDIiLCJpZCI6MjEzNzE3LCJpYXQiOjE3MTUxNTMyNTN9.V8jjqVMeAHjW0XfP3VFKwKuAZHxnYRC43HwCAq_UBvU';
-  viewer.value = new Cesium.Viewer(cesiumDiv.value)
+  const myimageryProviderViewModels = Cesium.createDefaultImageryProviderViewModels();
+  const array3 = myimageryProviderViewModels.concat(NLSC_ProviderViewModel);
+  viewer.value = new Cesium.Viewer(cesiumDiv.value, { imageryProviderViewModels: array3 });
+
   viewer.value.camera.flyTo({
     destination: Cesium.Cartesian3.fromDegrees(120.370197, 23.203426, 1000)
   })
@@ -182,16 +202,22 @@ onMounted(() => {
   const MouseOverSetInputAction = MouseOver.setInputAction();
 
   // props.CesiumImageLayers = []
-
-  document.querySelectorAll("input.form-check-input").forEach(async (item) => {
-    if (item.getAttribute('CesiumAssetsType') == "Imagery") {
+  IonLayers.forEach(async (item) => {
+    if (item.type == "Imagery") {
       const temp = Object();
-      temp.Layer = new Cesium.ImageryLayer(await Cesium.IonImageryProvider.fromAssetId(parseInt(item.id.slice(3, item.id.length))));
-      temp.Name = item.id;
+      temp.Layer = new Cesium.ImageryLayer(await Cesium.IonImageryProvider.fromAssetId(parseInt(item.IonID.slice(3, item.IonID.length))));
+      temp.Name = item.IonID;
       props.CesiumImageLayers.push(temp);
     }
   })
-  // setTimeout(()=>{console.log(props.CesiumImageLayers)},1000)
+
+  NLSC_ProviderViewModel.forEach(async (item, index) => {
+    const temp = Object();
+    temp.Layer = new Cesium.ImageryLayer(item.creationCommand());
+    temp.Name = 'NLSC_WMTS_' + index;
+    props.CesiumWNlscMTSLayers.push(temp);
+  })
+
 
 })
 

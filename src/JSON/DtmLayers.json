@@ -6,16 +6,6 @@
             "type": "Imagery"
         },
         {
-            "name": "112年日月潭水深成果",
-            "IonID": "Ion2568525",
-            "type": "Terrain"
-        },
-        {
-            "name": "111年日月潭水深成果",
-            "IonID": "Ion2568662",
-            "type": "Terrain"
-        },
-        {
             "name": "111-IM",
             "IonID": "Ion2568664",
             "type": "Imagery"
@@ -24,6 +14,16 @@
             "name": "112-Ion-gray",
             "IonID": "Ion2749084",
             "type": "Imagery"
+        },
+        {
+            "name": "112日月潭DTM",
+            "IonID": "Ion2568525",
+            "type": "Terrain"
+        },
+        {
+            "name": "111日月潭DTM",
+            "IonID": "Ion2568662",
+            "type": "Terrain"
         }
     ],
     "Drain": [
