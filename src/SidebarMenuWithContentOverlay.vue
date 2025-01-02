@@ -10,10 +10,10 @@ const loadIonResource = (IoID) => {
 const SetLayerTransparent = (IoID) => {
     cesiumDivRef.value.SetLayerTransparent(IoID)
 }
-const loadWMTSResource= (IoID) => {
+const loadWMTSResource = (IoID) => {
     cesiumDivRef.value.loadWMTSResource(IoID)
 }
-const SetLayerTransparentWMTS= (IoID) => {
+const SetLayerTransparentWMTS = (IoID) => {
     cesiumDivRef.value.SetLayerTransparentWMTS(IoID)
 }
 onMounted(() => {
@@ -52,7 +52,49 @@ function toggleMenuIcon($event) {
 //     loadIonResource, SetLayerTransparent,
 // });
 </script>
+<style lang="scss" scoped>
+@import '../node_modules/bootstrap/scss/mixins/';
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
 
+.offcanvas {
+    @include media-breakpoint-down(sm) {
+        max-width: 50px;
+    }
+}
+
+.MenuIconContainer.change {
+    @include media-breakpoint-down(sm) {
+        left: 50px;
+    }
+
+    @include media-breakpoint-up(md) {
+        left: 25%;
+    }
+}
+li.nav-link {
+    @include media-breakpoint-down(sm) {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    @include media-breakpoint-up(md) {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+a.nav-link {
+    @include media-breakpoint-down(sm) {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    @include media-breakpoint-up(md) {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+</style>
 <style lang="css" scoped>
 .MenuIconContainer {
     display: inline-block;
@@ -84,7 +126,7 @@ function toggleMenuIcon($event) {
     height: 5px;
     background-color: #333;
     margin: 6px 0;
-    transition: 0.4s;
+    transition: 1.0s;
 }
 
 .change .MenuIconbar1 {
@@ -133,7 +175,7 @@ function toggleMenuIcon($event) {
                     <a href="#" class="nav-link text-truncate">
                         <i class="fs-5 bi-table"></i><span class="ms-1 d-none d-sm-inline">Orders</span></a>
                 </li> -->
-                <li class="dropdown w-100">
+                <li class="nav-link align-middle w-100">
                     <a href="#" class="nav-link dropdown-toggle  text-truncate" id="dropdown" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <i class="fs-5 bi-water"></i><span class="ms-1 d-none d-sm-inline">歷年水深DTM</span>
@@ -142,7 +184,7 @@ function toggleMenuIcon($event) {
                         :data-type="'IonLayers'">
                     </LayerItem>
                 </li>
-                <li class="dropdown">
+                <li class="nav-link align-middle">
                     <a href="#" class="nav-link dropdown-toggle  text-truncate" id="dropdown" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <i class="fs-5 bi-fan"></i><span class="ms-1 d-none d-sm-inline">出水口</span>
@@ -151,13 +193,13 @@ function toggleMenuIcon($event) {
                         :data-type="'Drain'">
                     </LayerItem>
                 </li>
-                <li class="dropdown">
+                <li class="nav-link align-middle">
                     <a href="#" class="nav-link dropdown-toggle  text-truncate" id="dropdown" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <i class="fs-5 bi-fan"></i><span class="ms-1 d-none d-sm-inline">通用版電子圖資</span>
+                        <i class="fs-5 bi-layers-half"></i><span class="ms-1 d-none d-sm-inline">通用版電子圖資</span>
                     </a>
-                    <LayerItem :load-w-m-t-s-resource="loadWMTSResource" :set-layer-transparent="SetLayerTransparentWMTS"
-                        :data-type="'NLSC'">
+                    <LayerItem :load-w-m-t-s-resource="loadWMTSResource"
+                        :set-layer-transparent="SetLayerTransparentWMTS" :data-type="'NLSC'">
                     </LayerItem>
                 </li>
             </ul>

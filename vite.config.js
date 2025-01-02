@@ -26,6 +26,10 @@ export default defineConfig(({ mode }) => {
 
   return {
     base:'./',
+    build: {
+      outDir: '../../CesiumWusheReservoir',
+      emptyOutDir: false, // also necessary
+    },
     plugins: [
       vue(),
       copyCesium(['Assets', 'ThirdParty', 'Widgets', 'Workers']),

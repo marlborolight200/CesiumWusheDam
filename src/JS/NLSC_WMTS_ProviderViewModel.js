@@ -84,6 +84,7 @@ const layer_nlsc_MOI_CONTOUR_2_Model = new Cesium.ProviderViewModel({
     name: '等高線圖',
     tooltip: '等高線圖(2010-2015)Tooltip',
     category:'臺灣通用電子地圖',
+    
     iconUrl:Cesium.buildModuleUrl('./Widgets/Images/ImageryProviders/openStreetMap.png'),
     creationFunction: () => {
         return layer_nlsc_MOI_CONTOUR_2

@@ -31,9 +31,10 @@ function loadWMTSResource(event) {
   } else {
     IonID = event.currentTarget.id;
   }
-  const checked = document.getElementById(IonID).checked;
+  const checked = event.target.checked;
+  document.getElementById(IonID+"t").disabled = !checked;
   const layer = props.CesiumWNlscMTSLayers.find((item) => item.Name == IonID);
- 
+
   if (layer == null) { return; }
   if (viewer.value.scene.imageryLayers.contains(layer.Layer)) {
     // viewer.value.imageryLayers.raiseToTop(layer);
@@ -62,7 +63,8 @@ async function loadIonResource(event) {
     } else {
       IonID = event.currentTarget.id;
     }
-    const checked = document.getElementById(IonID).checked;
+    const checked = event.target.checked;;
+    document.getElementById(IonID+"t").disabled = !checked;
     try {
       switch (event.currentTarget.getAttribute("CesiumAssetsType")) {
         case "Imagery":
@@ -182,13 +184,27 @@ async function loadTerrain() {
 onMounted(() => {
   // Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwNzgwZTEyYy1kZmY4LTQ1YzItYmNiYi02NTAyY2RhZThlYTUiLCJpZCI6NzcwOSwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTU5MjQ1MjQ2MH0.8u2-_RDVWD2Ne_11zQ07wA_gyCMUB50bcRKTmd9szEY';
   Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NzAzZDc1NS1mOTNhLTQ3ZmEtOGM3Ny05OWYzMDI2NWNlZDIiLCJpZCI6MjEzNzE3LCJpYXQiOjE3MTUxNTMyNTN9.V8jjqVMeAHjW0XfP3VFKwKuAZHxnYRC43HwCAq_UBvU';
-  const myimageryProviderViewModels = Cesium.createDefaultImageryProviderViewModels();
-  const array3 = myimageryProviderViewModels.concat(NLSC_ProviderViewModel);
-  viewer.value = new Cesium.Viewer(cesiumDiv.value, { imageryProviderViewModels: array3 });
+  const extent = Cesium.Rectangle.fromDegrees(121.079739, 23.976750, 121.182030, 24.035331);
 
-  viewer.value.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(120.370197, 23.203426, 1000)
-  })
+  Cesium.Camera.DEFAULT_VIEW_RECTANGLE = extent;
+  Cesium.Camera.DEFAULT_VIEW_FACTOR = 0;
+  const imageryProviderViewModels = Cesium.createDefaultImageryProviderViewModels();
+  const myimageryProviderViewModels = imageryProviderViewModels.concat(NLSC_ProviderViewModel);
+  viewer.value = new Cesium.Viewer(cesiumDiv.value, {
+    imageryProviderViewModels: myimageryProviderViewModels,
+    animation: false,
+    // baseLayerPicker: false,
+    // navigationHelpButton: false,
+    // sceneModePicker: false,
+    // homeButton: false,
+    // geocoder: false,
+    // fullscreenButton: false,
+    timeline: false,
+  });
+
+  // viewer.value.camera.flyTo({
+  //   destination: Cesium.Cartesian3.fromDegrees(121.135841, 24.0002666, 10000)
+  // })
   var scene = viewer.value.scene;
   cesium3DTilesetCollection.value = scene.primitives.add(
     new Cesium.PrimitiveCollection()
